@@ -16,19 +16,19 @@ router.post('/register', async(req, res) => {
     const {
         error
     } = schema.validate(req.body);
-    res.send(error.details[0].message);
+    if (error) return res.status(400).send(error.details[0].message); // return error if validation is fail 
 
-    // const user = new User({
-    //     name: req.body.name,
-    //     email: req.body.email,
-    //     password: req.body.password
-    // });
-    // try {
-    //     const savedUser = await user.save();
-    //     res.sent(savedUser);
-    // } catch (err) {
-    //     res.status(400).send(err)
-    // }
+    const user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    });
+    try {
+        const savedUser = await user.save();
+        res.sent(savedUser);
+    } catch (err) {
+        res.status(400).send(err)
+    }
 });
 
 
