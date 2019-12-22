@@ -5,17 +5,23 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+//import routes
+const authRoute = require("./routes/auth");
+
+
 //connect to DB
 mongoose.connect(process.env.DB_CONNECT, {
         useNewUrlParser: true
     },
     () => console.log('connected to db!'))
 
-//import routes
-const authRoute = require("./routes/auth");
+
+//middleware
+
+app.use(express.json());
 
 //route middleware
 
 app.use("/api/user", authRoute); //  api/user/regsiter
 
-app.listen(3001, () => console.log("Server up and running"));
+app.listen(3002, () => console.log("Server up and running"));
