@@ -1,10 +1,11 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 
 //import routes
-const authRoute = require('./routes/auth');
+const authRoute = require("./routes/auth");
 
+//route middleware
 
+app.use("/api/user", authRoute); //  api/user/regsiter
 
-
-app.listen(3000, () => console.log('Server up and running'));
+app.listen(3001, () => console.log("Server up and running"));
