@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/ilyakoptev/auth/issues"
   },
-  "homepage": "https://github.com/ilyakoptev/auth#readme"
+  "homepage": "https://github.com/ilyakoptev/auth#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  }
 }
