@@ -37,10 +37,35 @@ router.post('/register', async(req, res) => {
     });
     try {
         const savedUser = await user.save();
-        res.sent(savedUser);
+        res.sent({
+            user: user._id
+        });
     } catch (err) {
         res.status(400).send(err)
     }
+});
+
+
+//LOGIN
+router.post('/login', async(req, res) => {
+    //lets validate the data before we make a user 
+    const {
+        error
+    } = loginValidation(req.body)
+    if (error) return res.status(400).send(error.details[0].message); // return error if validation is fail 
+
+
+    //checking if the email is already in the database 
+    const user = await User.findOne({
+        email: req.body.email
+    })
+    if (!user) return res.status(400).send('Email is not found ');
+    // check if password if correct 
+    const validPass = await bcrypt.compare(req.body.password, user.password);
+    if (!validPass) return res.status(400).send('Invalid password ');
+
+    res.send('Success')
+
 });
 
 
