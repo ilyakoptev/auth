@@ -7,6 +7,7 @@ dotenv.config();
 
 //import routes
 const authRoute = require("./routes/auth");
+const postRoute = require("./routes/posts");
 
 
 //connect to DB
@@ -23,5 +24,7 @@ app.use(express.json());
 //route middleware
 
 app.use("/api/user", authRoute); //  api/user/regsiter
+app.use("/api/posts", postRoute)
+
 
 app.listen(3002, () => console.log("Server up and running"));
