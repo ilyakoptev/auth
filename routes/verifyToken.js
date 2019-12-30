@@ -10,6 +10,7 @@ module.exports = function(req, res, next) {
     try {
         const verified = jwt.verify(token, process.env.TOKEN_SECRET); // get a '_id' back  (that we see in payload)
         req.user = verified;
+        next();
     } catch (err) {
         res.status(400).send('Invalid Token')
     }
